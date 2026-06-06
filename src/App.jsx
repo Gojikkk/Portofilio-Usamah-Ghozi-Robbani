@@ -42,9 +42,58 @@ function App() {
         </div>
       </div>
     </div>
+
+    <section className="about-section" id="tentang">
+      <div className="about-heading">
+        <p className="about-eyebrow">Tentang Saya</p>
+        <h2>About Me</h2>
+      </div>
+
+      <div className="about-content">
+        <div className="about-visual">
+          <div className="about-photo-card" aria-label="Foto about me">
+            <div className="about-photo-inner">
+              <img className="about-photo about-photo-front" src={DataImage.Goji2} alt="Usamah Ghozi Robbani" />
+              <img className="about-photo about-photo-back" src={DataImage.JsonImage} alt="JSON illustration" />
+            </div>
+          </div>
+        </div>
+
+        <div className="about-info">
+          <div className="about-card about-card-main">
+            <p>
+              Saya adalah mahasiswa Sistem Informasi yang memiliki minat di bidang Back-End Development,
+              khususnya dalam pengembangan API dan pengelolaan database. Saya senang membangun aplikasi web
+              yang efisien, terstruktur, dan dapat memberikan solusi untuk permasalahan nyata.
+            </p>
+            <p>
+              Saya memiliki pengalaman menggunakan JavaScript dengan Node.js dan Express.js untuk membangun
+              RESTful API dan mengelola database. Selain itu, saya juga memiliki pemahaman dasar mengenai PHP
+              dan Java.
+            </p>  
+          </div>
+
+          <div className="about-detail-grid">
+            <div className="about-card about-detail-card">
+              <i className="ri-graduation-cap-fill ri-xl"></i>
+              <div>
+                <p className="about-detail-title">Education</p>
+                <p>Information Systems Student</p>
+              </div>
+            </div>
+            <div className="about-card about-detail-card">
+              <i className="ri-map-pin-2-fill ri-xl"></i>
+              <div>
+                <p className="about-detail-title">Location</p>
+                <p>Depok, Jawa Barat</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     </>
   );
 }
 
 export default App
- 
