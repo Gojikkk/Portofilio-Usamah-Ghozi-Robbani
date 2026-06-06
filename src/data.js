@@ -1,7 +1,15 @@
 import HeroImage from "/assets/hero-img.webp";
+import Goji1 from "/assets/goji1.webp";
+import Goji3 from "/assets/goji3.webp";
+import Goji4 from "/assets/goji4.webp";
+import Goji5 from "/assets/goji5.webp";
 
 const Image = {
   HeroImage,
+  Goji1,
+  Goji3,
+  Goji4,
+  Goji5,
 };
 
 export default Image;
