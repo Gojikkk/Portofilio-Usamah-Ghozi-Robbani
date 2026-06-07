@@ -26,7 +26,7 @@ const Navbar = () => {
             md:bg-transparent md:border-0 transition-all md:transition-none ${active ? "top-0 opacity-100" : "-top-10 opacity-0"}`}>
             <li><a href="#" className="sm:text-lg text-base font-medium hover:text-blue-500">Beranda</a></li>
             <li><a href="#" className="sm:text-lg text-base font-medium hover:text-blue-500">Tentang</a></li>
-            <li><a href="#" className="sm:text-lg text-base font-medium hover:text-blue-500">Proyek</a></li>
+            <li><a href="#proyek" className="sm:text-lg text-base font-medium hover:text-blue-500">Proyek</a></li>
             <li><a href="#" className="sm:text-lg text-base font-medium hover:text-blue-500">Kontak</a></li>
         </ul>
     </div>

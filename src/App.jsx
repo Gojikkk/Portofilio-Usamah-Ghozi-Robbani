@@ -1,3 +1,5 @@
+import { listProyek } from "./data";
+
 const DataImage = {
   Goji1: "/assets/goji1.webp",
   Goji2: "/assets/goji2.webp",
@@ -133,7 +135,7 @@ function App() {
           <a href="https://www.linkedin.com/in/usamah-ghozi-robbani" className="hero-button hero-button-linkedin" target="_blank" rel="noopener noreferrer">
             LinkedIn <i className="ri-linkedin-box-fill ri-lg"></i>
           </a>
-          <a href="#" className="hero-button hero-button-secondary">
+          <a href="#proyek" className="hero-button hero-button-secondary">
             Lihat Proyek <i className="ri-arrow-down-line ri-lg"></i>
           </a>
         </div>
@@ -254,6 +256,53 @@ function App() {
         })}
       </div>
     </section>
+
+    {/* Proyek */}
+    <section className="project-section" id="proyek">
+      <div className="project-heading">
+        <p className="project-eyebrow">Selected Work</p>
+        <h2>Proyek</h2>
+        <p>
+          Berikut ini proyek yang telah saya kerjakan, baik secara individu maupun dalam tim. Proyek-proyek ini mencakup berbagai jenis web, API, dan database yang menunjukkan kemampuan saya dalam pengembangan backend.
+        </p>
+      </div>
+      <div className="projectbox">
+        {listProyek.map((proyek, index) => (
+          <article className="project-card" key={proyek.id} style={{ "--project-delay": `${index * 120}ms` }}>
+            <div className="project-image-wrap">
+              <img src={proyek.gambar} alt={proyek.nama} className="project-image" />
+              <div className="project-overlay">
+                <div className="project-links">
+                  {proyek.link && (
+                    <a href={proyek.link} target="_blank" rel="noopener noreferrer" className="project-link">
+                      <i className="ri-external-link-line"></i>
+                      Demo
+                    </a>
+                  )}
+                  {proyek.linkGithub && (
+                    <a href={proyek.linkGithub} target="_blank" rel="noopener noreferrer" className="project-link project-link-ghost">
+                      <i className="ri-github-fill"></i>
+                      Github
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="project-content">
+              <span className="project-number">0{index + 1}</span>
+              <h3 className="project-title">{proyek.nama}</h3>
+              <p className="project-description">{proyek.desk}</p>
+              <div className="project-tools">
+                {proyek.tools.map((tool, index) => (
+                  <span key={index} className="project-tool">{tool}</span>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+    {/* Proyek */}
     </>
   );
 }
