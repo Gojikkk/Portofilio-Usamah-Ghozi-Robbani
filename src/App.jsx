@@ -1,4 +1,115 @@
-import DataImage from "./data"
+const DataImage = {
+  Goji1: "/assets/goji1.webp",
+  Goji2: "/assets/goji2.webp",
+  Goji3: "/assets/goji3.webp",
+  Goji4: "/assets/goji4.webp",
+  Goji5: "/assets/goji5.webp",
+  JsonImage: "/assets/json.webp",
+}
+
+const listTools = [
+  {
+    id: 1,
+    gambar: "/assets/tools/js.png",
+    nama: "JavaScript",
+    ket: "Language",
+    warna: "#f7df1e",
+    gambarAsli: true,
+  },
+  {
+    id: 2,
+    gambar: "/assets/tools/nodejs.png",
+    nama: "Node JS",
+    ket: "Framework",
+    warna: "#5fa04e",
+  },
+  {
+    id: 3,
+    gambar: "/assets/tools/express.png",
+    nama: "Express JS",
+    ket: "Framework",
+    warna: "#ffffff",
+  },
+  {
+    id: 4,
+    gambar: "/assets/tools/php.png",
+    nama: "PHP",
+    ket: "Language",
+    warna: "#777BB4",
+  },
+  {
+    id: 5,
+    gambar: "/assets/tools/c.png",
+    nama: "C",
+    ket: "Language",
+    warna: "#A8B9CC",
+  },
+  {
+    id: 6,
+    gambar: "/assets/tools/mongodb.png",
+    nama: "MongoDB",
+    ket: "Database",
+    warna: "#47A248",
+  },
+  {
+    id: 7,
+    gambar: "/assets/tools/mysql.png",
+    nama: "MySQL",
+    ket: "Database",
+    warna: "#4479A1",
+  },
+  {
+    id: 8,
+    gambar: "/assets/tools/postgresql.png",
+    nama: "PostgreSQL",
+    ket: "Database",
+    warna: "#4169E1",
+  },
+  {
+    id: 10,
+    gambar: "/assets/tools/github.png",
+    nama: "Github",
+    ket: "Repository",
+    warna: "#ffffff",
+    gambarAsli: true,
+  },
+  {
+    id: 11,
+    gambar: "/assets/tools/git.png",
+    nama: "Git",
+    ket: "Version Control",
+    warna: "#F03C2E",
+  },
+  {
+    id: 12,
+    gambar: "/assets/tools/vercel.png",
+    nama: "Vercel",
+    ket: "Deployment Platform",
+    warna: "#ffffff",
+  },
+  {
+    id: 13,
+    gambar: "/assets/tools/postman.png",
+    nama: "Postman",
+    ket: "API Testing Tool",
+    warna: "#FF6C37",
+  },
+]
+
+const toolMotions = [
+  { y: "0px", x: "2px", xBack: "-1px", floatY: "-5px", duration: "5600ms", phase: "-300ms" },
+  { y: "6px", x: "-2px", xBack: "1px", floatY: "-4px", duration: "6200ms", phase: "-1600ms" },
+  { y: "0px", x: "1px", xBack: "-2px", floatY: "-6px", duration: "5900ms", phase: "-900ms" },
+  { y: "6px", x: "-1px", xBack: "2px", floatY: "-5px", duration: "6500ms", phase: "-2400ms" },
+  { y: "0px", x: "-2px", xBack: "1px", floatY: "-4px", duration: "6000ms", phase: "-1300ms" },
+  { y: "6px", x: "2px", xBack: "-1px", floatY: "-6px", duration: "6800ms", phase: "-500ms" },
+  { y: "0px", x: "-1px", xBack: "2px", floatY: "-5px", duration: "5700ms", phase: "-2100ms" },
+  { y: "6px", x: "1px", xBack: "-2px", floatY: "-4px", duration: "6300ms", phase: "-1200ms" },
+  { y: "0px", x: "2px", xBack: "-1px", floatY: "-6px", duration: "6600ms", phase: "-3000ms" },
+  { y: "6px", x: "-2px", xBack: "1px", floatY: "-5px", duration: "5800ms", phase: "-700ms" },
+  { y: "0px", x: "1px", xBack: "-2px", floatY: "-4px", duration: "6400ms", phase: "-2600ms" },
+  { y: "6px", x: "-1px", xBack: "2px", floatY: "-5px", duration: "6100ms", phase: "-100ms" },
+]
 
 function App() {
 
@@ -90,6 +201,57 @@ function App() {
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section className="tools-section" id="tools">
+      <div className="tools-heading">
+        <p className="tools-eyebrow">Tech Stack</p>
+        <h2>Tools yang Saya Gunakan</h2>
+      </div>
+
+      <div className="tools-box">
+        {listTools.map((tool, index) => {
+          const motion = toolMotions[index % toolMotions.length]
+
+          return (
+          <article
+            className="tool-card"
+            key={tool.id}
+            style={{
+              "--tool-color": tool.warna,
+              "--delay": `${index * 55}ms`,
+              "--rest-y": motion.y,
+              "--float-x": motion.x,
+              "--float-x-back": motion.xBack,
+              "--float-y": motion.floatY,
+              "--float-duration": motion.duration,
+              "--float-phase": motion.phase,
+            }}
+          >
+            <div className="tool-icon-wrap">
+              {tool.gambarAsli ? (
+                <img className="tool-icon tool-icon-image" src={tool.gambar} alt={tool.nama} />
+              ) : (
+                <span
+                  aria-label={tool.nama}
+                  role="img"
+                  className="tool-icon"
+                  style={{
+                    backgroundColor: tool.warna,
+                    WebkitMask: `url(${tool.gambar}) center / contain no-repeat`,
+                    mask: `url(${tool.gambar}) center / contain no-repeat`,
+                  }}
+                ></span>
+              )}
+            </div>
+            <div className="tool-info">
+              <h4>{tool.nama}</h4>
+              <p>{tool.ket}</p>
+            </div>
+          </article>
+          )
+        })}
       </div>
     </section>
     </>
