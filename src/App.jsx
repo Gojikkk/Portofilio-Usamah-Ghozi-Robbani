@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { listProyek } from "./data";
 
 const DataImage = {
@@ -114,6 +115,28 @@ const toolMotions = [
 ]
 
 function App() {
+  useEffect(() => {
+    const revealElements = document.querySelectorAll(".scroll-reveal")
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible")
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      {
+        threshold: 0.08,
+        rootMargin: "0px 0px -24px 0px",
+      }
+    )
+
+    revealElements.forEach((element) => observer.observe(element))
+
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <>
@@ -157,13 +180,13 @@ function App() {
     </div>
 
     <section className="about-section" id="tentang">
-      <div className="about-heading">
+      <div className="about-heading scroll-reveal reveal-fade">
         <p className="about-eyebrow">Tentang Saya</p>
         <h2>About Me</h2>
       </div>
 
       <div className="about-content">
-        <div className="about-visual">
+        <div className="about-visual scroll-reveal reveal-tilt-left">
           <div className="about-photo-card" aria-label="Foto about me">
             <div className="about-photo-inner">
               <img className="about-photo about-photo-front" src={DataImage.Goji2} alt="Usamah Ghozi Robbani" />
@@ -172,7 +195,7 @@ function App() {
           </div>
         </div>
 
-        <div className="about-info">
+        <div className="about-info scroll-reveal reveal-tilt-right">
           <div className="about-card about-card-main">
             <p>
               Saya adalah mahasiswa Sistem Informasi yang memiliki minat di bidang Back-End Development,
@@ -207,18 +230,18 @@ function App() {
     </section>
 
     <section className="tools-section" id="tools">
-      <div className="tools-heading">
+      <div className="tools-heading scroll-reveal reveal-pop">
         <p className="tools-eyebrow">Tech Stack</p>
         <h2>Tools yang Saya Gunakan</h2>
       </div>
 
-      <div className="tools-box">
+      <div className="tools-box scroll-reveal reveal-cascade">
         {listTools.map((tool, index) => {
           const motion = toolMotions[index % toolMotions.length]
 
           return (
           <article
-            className="tool-card"
+            className="tool-card reveal-child"
             key={tool.id}
             style={{
               "--tool-color": tool.warna,
@@ -229,6 +252,7 @@ function App() {
               "--float-y": motion.floatY,
               "--float-duration": motion.duration,
               "--float-phase": motion.phase,
+              "--reveal-delay": `${index * 70}ms`,
             }}
           >
             <div className="tool-icon-wrap">
@@ -259,16 +283,16 @@ function App() {
 
     {/* Proyek */}
     <section className="project-section" id="proyek">
-      <div className="project-heading">
+      <div className="project-heading scroll-reveal reveal-fade">
         <p className="project-eyebrow">Selected Work</p>
         <h2>Proyek</h2>
         <p>
           Berikut ini proyek yang telah saya kerjakan, baik secara individu maupun dalam tim. Proyek-proyek ini mencakup berbagai jenis web, API, dan database yang menunjukkan kemampuan saya dalam pengembangan backend.
         </p>
       </div>
-      <div className="projectbox">
+      <div className="projectbox scroll-reveal reveal-cascade">
         {listProyek.map((proyek, index) => (
-          <article className="project-card" key={proyek.id} style={{ "--project-delay": `${index * 120}ms` }}>
+          <article className="project-card reveal-child" key={proyek.id} style={{ "--reveal-delay": `${index * 140}ms` }}>
             <div className="project-image-wrap">
               <img src={proyek.gambar} alt={proyek.nama} className="project-image" />
               <div className="project-overlay">
@@ -303,6 +327,91 @@ function App() {
       </div>
     </section>
     {/* Proyek */}
+
+    <section className="contact-section" id="kontak">
+      <div className="contact-heading scroll-reveal reveal-pop">
+        <p className="contact-eyebrow">Get In Touch</p>
+        <h2>Kontak</h2>
+        <p>
+          Tertarik bekerja sama atau ingin diskusi seputar project backend? Kirim email atau hubungi saya lewat sosial media berikut.
+        </p>
+      </div>
+
+      <div className="contact-content scroll-reveal reveal-split">
+        <form
+          className="contact-form"
+          action="https://formsubmit.co/ghozirobbani74@gmail.com"
+          method="POST"
+        >
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="text" name="_honey" className="contact-honey" tabIndex="-1" autoComplete="off" />
+          <div className="contact-form-grid">
+            <label className="contact-field">
+              <span>Nama</span>
+              <input type="text" name="name" placeholder="Nama kamu" required />
+            </label>
+            <label className="contact-field">
+              <span>Email</span>
+              <input type="email" name="email" placeholder="email@contoh.com" required />
+            </label>
+          </div>
+          <label className="contact-field">
+            <span>Subject</span>
+            <input type="text" name="_subject" placeholder="Mau diskusi project" required />
+          </label>
+          <label className="contact-field">
+            <span>Pesan</span>
+            <textarea name="message" placeholder="Tulis pesan kamu di sini..." rows="6" required></textarea>
+          </label>
+          <button className="contact-submit" type="submit">
+            Kirim Pesan <i className="ri-send-plane-fill"></i>
+          </button>
+        </form>
+
+        <div className="contact-side">
+          <div className="contact-side-card">
+            <span className="contact-icon">
+              <i className="ri-chat-3-fill"></i>
+            </span>
+            <div>
+              <p className="contact-label">Kontak Langsung</p>
+              <h3>Let&apos;s build something useful.</h3>
+              <a
+                className="contact-email-link"
+                href="mailto:ghozirobbani74@gmail.com?subject=Halo%20Ghozi%2C%20saya%20tertarik%20untuk%20berdiskusi&body=Halo%20Ghozi%2C%0A%0ASaya%20ingin%20berdiskusi%20tentang..."
+              >
+                <i className="ri-mail-line"></i>
+                <span>ghozirobbani74@gmail.com</span>
+              </a>
+            </div>
+          </div>
+
+          <div className="contact-socials">
+            <a
+              className="contact-social-card"
+              href="https://www.linkedin.com/in/usamah-ghozi-robbani"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
+              <i className="ri-linkedin-box-fill"></i>
+              <span>LinkedIn</span>
+            </a>
+            <a
+              className="contact-social-card"
+              href="https://github.com/Gojikkk"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
+              <i className="ri-github-fill"></i>
+              <span>GitHub</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
     </>
   );
 }
